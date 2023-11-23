@@ -5,7 +5,14 @@ function App() {
   return (
     <>
       <Canvas camera={{ position: [-1.5, 3, 10], fov: 42 }}>
-        <OrbitControls />
+        <OrbitControls
+          enablePan={false}
+          maxPolarAngle={Math.PI / 2}
+          minAzimuthAngle={-Math.PI / 2}
+          maxAzimuthAngle={Math.PI / 2}
+          // enableZoom={false}
+          // rotateSpeed={0.55}
+        />
         <Lighthouse position-y={-1} scale={[0.2, 0.2, 0.2]} />
         <Environment preset="sunset" />
       </Canvas>
