@@ -1,7 +1,21 @@
 import { ContactShadows, Environment, OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
+import { useControls, button } from "leva";
 
 const Cube = (props) => {
+  const camera = useThree((state) => state.camera);
+
+  const updateFov = (fov) => {
+    camera.fov = fov;
+    camera.updateProjectionMatrix();
+  };
+
+  useControls("FOV", {
+    smallFov: button(() => updateFov(20)),
+    normalFov: button(() => updateFov(42)),
+    bigFov: button(() => updateFov(60)),
+    hugeFov: button(() => updateFov(110)),
+  });
   return (
     <mesh {...props}>
       <boxGeometry />
