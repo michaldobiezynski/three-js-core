@@ -2,9 +2,11 @@ import {
   Environment,
   OrbitControls,
   PresentationControls,
+  
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Lighthouse } from "./components/Lighthouse";
+import { MoveableItem } from "./components/MoveableItem";
 function App() {
   return (
     <>
@@ -19,7 +21,7 @@ function App() {
           // enableZoom={false}
           // rotateSpeed={0.55}
         /> */}
-        <PresentationControls
+        {/* <PresentationControls
           enabled={true} // the controls can be disabled by setting this to false
           global={false} // Spin globally or by dragging the model
           cursor={true} // Whether to toggle cursor style on drag
@@ -30,9 +32,12 @@ function App() {
           polar={[0, Math.PI / 2]} // Vertical limits
           azimuth={[-Infinity, Infinity]} // Horizontal limits
           config={{ mass: 1, tension: 170, friction: 26 }} // Spring config
-        >
+        > */}
+
+        <MoveableItem>
           <Lighthouse position-y={-1} scale={[0.2, 0.2, 0.2]} />
-        </PresentationControls>
+        </MoveableItem>
+        {/* </PresentationControls> */}
         <Environment preset="sunset" />
       </Canvas>
     </>
