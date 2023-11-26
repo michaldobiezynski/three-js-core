@@ -1,9 +1,9 @@
 import {
-  ContactShadows,
-  useGLTF,
-  Text,
   Billboard,
+  ContactShadows,
+  Text,
   Text3D,
+  useGLTF,
 } from "@react-three/drei";
 import { Character } from "./Character";
 
@@ -15,10 +15,15 @@ export const Experience = () => {
   return (
     <>
       <Text3D
-        font="fonts/MedievalSharp/MedievalSharp-Regular.ttf"
+        font={"fonts/Inter_Bold.json"}
         rotation-y={THREE.MathUtils.degToRad(30)}
+        position={[-8, 0, -5]}
         size={4}
-        position={[-8, 0, -5]}>
+        bevelEnabled
+        bevelThickness={0.5}
+        bevelSize={0.1}
+        bevelSegments={10}
+      >
         ZELDA
         <meshStandardMaterial color={"#a1bb6f"} />
       </Text3D>
@@ -29,20 +34,22 @@ export const Experience = () => {
           position={[0, 1.2, 0.01]}
           maxWidth={1}
           textAlign="center"
-          font="fonts/MedievalSharp/MedievalSharp-Regular.ttf">
+          font="fonts/MedievalSharp-Regular.ttf"
+          characters="Hyrule Castle"
+        >
           Hyrule Castle
-          <meshStandardMaterial color="#803d1c" />
+          <meshStandardMaterial color={"#803d1c"} />
         </Text>
       </group>
       <group position={[1.5, 0, 0]} rotation-y={-Math.PI / 4}>
         <Billboard position-y={3}>
-          <Text fontSize={0.2} anchorY={"bottom"} position-y={0.2}>
+          <Text fontSize={0.2} anchorY={"bottom"}>
             Link
-            <meshStandardMaterial color="black" />
+            <meshStandardMaterial color={"black"} />
           </Text>
-          <Text fontSize={0.2}>
+          <Text fontSize={0.2} anchorY={"top"}>
             Zelda personal hero
-            <meshStandardMaterial color="grey" />
+            <meshStandardMaterial color={"grey"} />
           </Text>
         </Billboard>
         <Character />
