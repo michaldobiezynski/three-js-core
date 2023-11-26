@@ -19,8 +19,8 @@ export function Fish(props) {
   });
 
   useEffect(() => {
-    actions[animation].play();
-    return () => actions[animation].stop();
+    actions[animation].reset().fadeIn(0.5).play();
+    return () => actions[animation].fadeOut(0.5).stop();
   }, [animation]);
 
   return (
