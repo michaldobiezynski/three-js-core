@@ -12,10 +12,13 @@ const CubeLoader = () => {
   );
 };
 
+const LoadingScreen = () => {};
+
 function App() {
   return (
     <>
-      <Canvas camera={{ position: [-4, 4, 12], fov: 30 }}>
+      <LoadingScreen />
+      <Canvas camera={{ position: [-4, 4, 12], fov: 40 }}>
         <Suspense fallback={<CubeLoader />}>
           <group position-y={-1}>
             <Experience />

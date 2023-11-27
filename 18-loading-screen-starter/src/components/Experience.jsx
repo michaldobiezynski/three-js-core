@@ -8,7 +8,17 @@ import { Adventurer } from "./Adventurer";
 import { CasualHoodie } from "./CasualHoodie";
 import { King } from "./King";
 import { Spacesuit } from "./Spacesuit";
+import { useState, useEffect } from "react";
+
 export const Experience = () => {
+  const [kingVisble, setKingVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setKingVisible(true);
+    }, 1000);
+  }, []);
+
   return (
     <>
       <OrbitControls
@@ -19,14 +29,12 @@ export const Experience = () => {
         maxDistance={20}
       />
       <Environment preset="sunset" />
-
       <Text3D
         font="fonts/Inter_Bold.json"
         size={0.8}
         position={[-3.5, 2, -3]}
         bevelEnabled
-        bevelThickness={0.2}
-      >
+        bevelThickness={0.2}>
         OUR
         <meshStandardMaterial color="white" />
       </Text3D>
@@ -35,12 +43,11 @@ export const Experience = () => {
         size={1.8}
         position={[-3.5, 0, -3]}
         bevelEnabled
-        bevelThickness={0.2}
-      >
+        bevelThickness={0.2}>
         TEAM
         <meshStandardMaterial color="white" />
       </Text3D>
-      <King position-x={-3} rotation-y={-Math.PI / 4} />
+      {kingVisble && <King position-x={-3} rotation-y={-Math.PI / 4} />}
       <Adventurer position-x={-1} />
       <Spacesuit position-x={1} />
       <CasualHoodie position-x={3} rotation-y={Math.PI / 4} />
