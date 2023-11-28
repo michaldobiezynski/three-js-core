@@ -1,16 +1,23 @@
 import {
   Environment,
   OrbitControls,
+  Scroll,
   Text3D,
   useGLTF,
-  Scroll,
+  useScroll,
 } from "@react-three/drei";
 import { Panda } from "./Panda";
-import { useThree } from "@react-three/fiber";
 
+import { useFrame, useThree } from "@react-three/fiber";
+import { useRef } from "react";
 import { foodItems } from "../App";
 
 export const Experience = () => {
+  const scrollData = useScroll();
+  useFrame((state) => {
+    state.camera.position.x = -2 + scrollData.offset * 4;
+  });
+
   return (
     <>
       <OrbitControls
@@ -26,7 +33,8 @@ export const Experience = () => {
           size={0.8}
           position={[-3.5, 2, -3]}
           bevelEnabled
-          bevelThickness={0.2}>
+          bevelThickness={0.2}
+        >
           PANDA
           <meshStandardMaterial color="#333344" />
         </Text3D>
@@ -35,7 +43,8 @@ export const Experience = () => {
           size={1.8}
           position={[-3.5, 0, -3]}
           bevelEnabled
-          bevelThickness={0.2}>
+          bevelThickness={0.2}
+        >
           SUSHI
           <meshStandardMaterial color="white" />
         </Text3D>
@@ -52,11 +61,25 @@ export const Experience = () => {
 
 const FoodItem = ({ model, page }) => {
   const gltf = useGLTF(model);
-
   const viewport = useThree((state) => state.viewport);
+  const ref = useRef();
+  const scrollData = useScroll();
+
+  useFrame(() => {
+    const pageScroll = scrollData.offset;
+    ref.current.rotation.y = pageScroll * Math.PI * 2;
+    const pages = scrollData.pages - 1;
+    const offsetX = 2;
+
+    // ref.current.position.x =
+    //   scrollData.range((page - 1) / pages, 1 / pages) * offsetX;
+
+    ref.current.position.x =
+      scrollData.curve((page - 1) / pages, 2 / pages) * offsetX;
+  });
 
   return (
-    <group>
+    <group ref={ref}>
       <primitive
         object={gltf.scene}
         position={[0, -viewport.height * page, 0]}
