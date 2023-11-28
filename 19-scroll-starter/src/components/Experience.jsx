@@ -1,5 +1,12 @@
-import { Environment, OrbitControls, Text3D, useGLTF } from "@react-three/drei";
+import {
+  Environment,
+  OrbitControls,
+  Text3D,
+  useGLTF,
+  Scroll,
+} from "@react-three/drei";
 import { Panda } from "./Panda";
+import { useThree } from "@react-three/fiber";
 
 import { foodItems } from "../App";
 
@@ -19,8 +26,7 @@ export const Experience = () => {
           size={0.8}
           position={[-3.5, 2, -3]}
           bevelEnabled
-          bevelThickness={0.2}
-        >
+          bevelThickness={0.2}>
           PANDA
           <meshStandardMaterial color="#333344" />
         </Text3D>
@@ -29,16 +35,17 @@ export const Experience = () => {
           size={1.8}
           position={[-3.5, 0, -3]}
           bevelEnabled
-          bevelThickness={0.2}
-        >
+          bevelThickness={0.2}>
           SUSHI
           <meshStandardMaterial color="white" />
         </Text3D>
         <Panda position={[2.5, 0, -5]} rotation-y={-Math.PI / 6} />
       </group>
-      {foodItems.map((foodItem, idx) => (
-        <FoodItem key={idx} {...foodItem} />
-      ))}
+      <Scroll>
+        {foodItems.map((foodItem, idx) => (
+          <FoodItem key={idx} {...foodItem} />
+        ))}
+      </Scroll>
     </>
   );
 };
@@ -46,9 +53,14 @@ export const Experience = () => {
 const FoodItem = ({ model, page }) => {
   const gltf = useGLTF(model);
 
+  const viewport = useThree((state) => state.viewport);
+
   return (
     <group>
-      <primitive object={gltf.scene} position={[0, -page, 0]} />
+      <primitive
+        object={gltf.scene}
+        position={[0, -viewport.height * page, 0]}
+      />
     </group>
   );
 };
