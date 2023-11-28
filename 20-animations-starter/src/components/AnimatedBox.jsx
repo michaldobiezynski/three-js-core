@@ -12,21 +12,23 @@ export const AnimatedBox = ({ boxPositions, ...props }) => {
     const seconds = parseInt(time);
     const targetPosition = boxPositions[seconds % boxPositions.length];
 
-    box.current.position.x = THREE.MathUtils.lerp(
-      box.current.position.x,
-      targetPosition.x,
-      0.05
-    );
-    box.current.position.y = THREE.MathUtils.lerp(
-      box.current.position.y,
-      targetPosition.y,
-      0.05
-    );
-    box.current.position.z = THREE.MathUtils.lerp(
-      box.current.position.z,
-      targetPosition.z,
-      0.05
-    );
+    // box.current.position.x = THREE.MathUtils.lerp(
+    //   box.current.position.x,
+    //   targetPosition.x,
+    //   0.05
+    // );
+    // box.current.position.y = THREE.MathUtils.lerp(
+    //   box.current.position.y,
+    //   targetPosition.y,
+    //   0.05
+    // );
+    // box.current.position.z = THREE.MathUtils.lerp(
+    //   box.current.position.z,
+    //   targetPosition.z,
+    //   0.05
+    // );
+
+    box.current.position.lerp(targetPosition, 0.04);
   });
 
   return (
